@@ -10,7 +10,7 @@
 
   <script>
     //課題作業日：2022/11/12
-    
+
     // 変数を定義していきましょう。
     // JSには３種類の定義の仕方があります。
     // それぞれという変数に１を代入し、違いをコメントで記入して下さい
@@ -21,20 +21,29 @@
     ・初期値なしの宣言：可能
     ・再宣言(定義)：不可
     */
+    //↓初期値なし
     let  variable_let;
-    variable_let = 1
-    console.log(variable_let)
+    variable_let = 1;
+    console.log(variable_let);
+
+    //↓初期値あり、再代入
+    //let variable_let = 0;
+    //variable_let = 1;
+    //console.log(variable_let);
 
     /*
-    変数「val」
+    変数「var」
     ・再代入：可能
     ・初期値なしの宣言：可能
     ・再宣言(定義)：可能
     */
+    //↓初期値なし
     var variable_var;
     variable_var = 1;
     console.log(variable_var);
-    var variable_var = 1;
+    //↓初期値あり、再代入
+    var variable_var = 0;
+    variable_var = 1;
     console.log(variable_var);
 
     /*
