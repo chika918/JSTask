@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+  <script>
+    //課題作業日：2022/11/12
+    
+    // 変数を定義していきましょう。
+    // JSには３種類の定義の仕方があります。
+    // それぞれという変数に１を代入し、違いをコメントで記入して下さい
+
+    /*
+    変数「let」
+    ・再代入：可能
+    ・初期値なしの宣言：可能
+    ・再宣言(定義)：不可
+    */
+    let  variable_let;
+    variable_let = 1
+    console.log(variable_let)
+
+    /*
+    変数「val」
+    ・再代入：可能
+    ・初期値なしの宣言：可能
+    ・再宣言(定義)：可能
+    */
+    var variable_var;
+    variable_var = 1;
+    console.log(variable_var);
+    var variable_var = 1;
+    console.log(variable_var);
+
+    /*
+    変数「const」
+    ・再代入：不可
+    ・初期値なしの宣言：不可
+    ・再宣言(定義)：不可
+    */
+    const variable_const = 1;
+    console.log(variable_const);
+  </script>
+</body>
+</html>
