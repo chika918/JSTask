@@ -9,7 +9,7 @@
 <body>
   
   <script>
-    // 課題作業日：2022/11/15
+    // 課題作業日：2022/11/13、15
 
     // 問１
     // 以下の品物を配列で定義してください。
@@ -21,10 +21,9 @@
     for (let i = 0; i < fruits.length; i++){
       console.log(fruits[i]);
     }
-   
-
+    
     // for of文
-    for (const fruit of fruits){
+    for (let fruit of fruits){
       console.log(fruit);
     }
 
@@ -37,7 +36,7 @@
     // 消しゴムは200円かかります。
     // 定規は500円かかります。
     
-    let price = {
+    const price = {
       '鉛筆': '100円',
       '消しゴム': '200円',
       '定規': '500円',
