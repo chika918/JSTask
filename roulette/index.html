@@ -10,7 +10,7 @@
             border: 3px solid black;
             border-collapse: collapse;
         }
-        td{
+        #td1,#td2,#td3,#td4,#td5,#td6,#td7,#td8,#td9,#td10,#td11,#td12,#td13,#td14,#td15,#td16{
             width: 90px;
             height: 90px;
             font-size: 45px;
@@ -21,7 +21,8 @@
             background-color: rebeccapurple;
         }
         .resetAll {
-            background-color: transparent;
+            background-color: transparent ;
+            /*background-color: aqua;*/
         }
         div {
             display: flex;
@@ -71,6 +72,13 @@
     </div>
     
     <script>
+    document.addEventListener('DOMContentLoaded',function(){ 
+        //画面遷移時にストップボタン、リセットボタンを非活性
+        let stopBtn = document.getElementById('stop');
+        let resetBtn = document.getElementById('reset');
+        stopBtn.disabled = true;
+        resetBtn.disabled = true;
+
         //マスNo.1~16のクラスを取得
         let list = document.getElementsByClassName('tdNum');
 
@@ -92,6 +100,9 @@
         //スタートボタン処理
         let number;
         function startevent (){
+            //ストップボタン、リセットボタンを活性
+            stopBtn.disabled = false;
+            resetBtn.disabled = false;
             //0~15のランダムな値を取得
             number = Math.floor(Math.random() * list.length);
             //↓挙動確認用↓
@@ -217,78 +228,52 @@
             //ストップボタンをダブルクリックしないとマスの背景の色付けが固定されない
             //　→クリック時にマスの背景の色付けを固定したい
             //ストップボタンクリック時に選択された値を保持→選択肢から除外したい
-
-            //スタートボタンを1度もクリックしない状態でストップボタンをクリックするとエラーになる
-            //1度スタートボタンをクリック→ストップボタンクリック→リセットボタンクリック→再度ストップボタンをクリックすると色がつく
-
-
-            //splice
+            //　→splice
     
         });
+
         
         //リセットボタンクリック
         //スタートボタン処理をストップ
+        let array = [];
+        function resetEvent (){
+            for(let i = 0; i <16 ; i++){
+                array.push(document.getElementById('td'+i));
+            }
+            array.classList.add('resetAll');
+            //array.style.backgroundColor = 'black'
+            console.log(array);
+        }
+        
         document.getElementById('reset').addEventListener('click', function(){
             clearInterval(timerId);
-            setNum.classList.remove('change');
+            resetEvent();
+
+            //let reset = document.getElementById('tb');
+            //reset.classList.add('resetAll');
+
+            //let id = document.getElementById('td1');
+            //console.log(id);
+            //let classN = document.getElementsByClassName('tdNum');
+            //console.log(classN);
+
+            //aiu();
+            //let obj = document.querySelectorAll('td');
+            //console.log(obj);
+            //obj.style.backgroundColor = "white";
+            
+            
+            //all.style.backgroundColor = 'black';
+
+           
 
             //ストップボタンクリックで選択された値を全て削除したい
             //全てのマスのbackgroundColorをリセットしたい
 
-            //スタートボタンを1度もクリックしない状態でリセットボタンをクリックするとエラーになる
-
         });
         
-        
-
-
-
-
-
-
-
-        //以下メモ
-        //const stop = document.querySelector('stop');
-        //start.addEventListener('click', function () {
-
-            //const b = [0,1,2,3];
-            //const c = Math.floor(Math.random() * b.lenght);
-            //if (c == 0){
-            //    document.getElementById('a1').style.backgroundColor = 'black';
-            //}
-        //});
-
-            //const list = document.querySelectorAll('.a');
-            //const number = Math.floor(Math.random() * list.length);
-            //While (stop.addEventListener('click')){
-                //if (number == 0){
-                //document.getElementById('a1').style.backgroundColor = 'black';
-                //}
-            //}
-
-            //const stop = document.querySelector('.stop');
-            //stop.addEventListener('click',function(){
-            //マスを色付け
-            //
-            //const list = document.querySelectorAll('td');
-            //const number = Math.floor(Math.random() * list.length);
-            
-            /*
-            要素.style.backgroundColor = '';
-            */
-            //});
-            //number.style.backgroundColor = "black";
-            //マスを特定
-            //ランダムにマスを発光 つく→消す→つくを繰り返す→While
-            //While (stop.addEventListener('click'))
-            //ついているマスは省く
-
-
-
-
-
-
-        
+    })
+       
     </script>
 </body>
 </html>
