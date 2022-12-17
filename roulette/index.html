@@ -18,11 +18,10 @@
             text-align: center;
         }
         .change {
-            background-color: rebeccapurple;
+            background-color: rgb(157, 102, 211);
         }
         .resetAll {
             background-color: transparent ;
-            /*background-color: aqua;*/
         }
         div {
             display: flex;
@@ -72,137 +71,127 @@
     </div>
     
     <script>
-    document.addEventListener('DOMContentLoaded',function(){ 
+        //document.addEventListener('DOMContentLoaded',function(){ 
         //画面遷移時にストップボタン、リセットボタンを非活性
         let stopBtn = document.getElementById('stop');
         let resetBtn = document.getElementById('reset');
         stopBtn.disabled = true;
         resetBtn.disabled = true;
+        //})
 
-        //マスNo.1~16のクラスを取得
-        let list = document.getElementsByClassName('tdNum');
-
-        //マスの色付けの処理
+        //1~16の配列を定義
+        let list = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16];
+        
+        //マスの背景色変更処理
         let setNum;
-        function changeCss(){
-            setNum.classList.add('change');
+        function changeCss(tdId){
+            //取得された配列に紐づくIdをsetNumに入れておく
+            setNum = tdId;
+
+            //背景色の変更⇆削除の繰り返し
+            tdId.classList.add('change');
+            setTimeout(() => {
+                tdId.classList.remove('change');
+            },500
+            );
         }
-        //マスの色付け解除の処理
-        function clearCss(){
-            setNum.classList.remove('change');
-        }
-        //マスの色付け解除の処理を実行
-        //実行タイミングをn秒後にする
-        function resetCss(){
-            setTimeout(clearCss,500);
-        }
-                    
+    
         //スタートボタン処理
-        let number;
+        let i;
+        let number
         function startevent (){
             //ストップボタン、リセットボタンを活性
             stopBtn.disabled = false;
             resetBtn.disabled = false;
             //0~15のランダムな値を取得
-            number = Math.floor(Math.random() * list.length);
+            i = Math.floor(Math.random() * list.length);
+            number = i + 1;
             //↓挙動確認用↓
+            //console.log(i);
             //console.log(number);
+
 
             //ランダムに取得した値0~15の条件分岐
             switch (number){ 
-                case 0:
-                    //マスNo.1のIDを取得
-                    setNum = document.getElementById('td1');
-                    //マスの色付け処理を実行
-                    changeCss();
-                    //マスの色付け解除＆実行タイミング処理を実行
-                    resetCss();
-                    break;
-
-                    //setTimeout(clearCss,500);
-
                 case 1:
-                    setNum = document.getElementById('td2');
-                    changeCss();
-                    resetCss();
-                    break
+                    //マスの背景色変更処理を実行
+                    changeCss(td1);
+                    break;
                 case 2:
-                    setNum = document.getElementById('td3')
-                    changeCss();
-                    resetCss();
+                    changeCss(td2);
                     break
                 case 3:
-                    setNum = document.getElementById('td4')
-                    changeCss();
-                    resetCss();
+                    changeCss(td3);
                     break
                 case 4:
-                    setNum = document.getElementById('td5')
-                    changeCss();
-                    resetCss();
+                    changeCss(td4);
                     break
                 case 5:
-                    setNum = document.getElementById('td6')
-                    changeCss();
-                    resetCss();
+                    changeCss(td5);
                     break
                 case 6:
-                    setNum = document.getElementById('td7')
-                    changeCss();
-                    resetCss();
-                    break
-                case 6:
-                    setNum = document.getElementById('td8')
-                    changeCss();
-                    resetCss();
+                    changeCss(td6);
                     break
                 case 7:
-                    setNum = document.getElementById('td8')
-                    changeCss();
-                    resetCss();
+                    changeCss(td7);
                     break
                 case 8:
-                    setNum = document.getElementById('td9')
-                    changeCss();
-                    resetCss();
+                    changeCss(td8);
                     break
                 case 9:
-                    setNum = document.getElementById('td10')
-                    changeCss();
-                    resetCss();
+                    changeCss(td9);
                     break
                 case 10:
-                    setNum = document.getElementById('td11')
-                    changeCss();
-                    resetCss();
+                    changeCss(td10);
                     break
                 case 11:
-                    setNum = document.getElementById('td12')
-                    changeCss();
-                    resetCss();
+                    changeCss(td11);
                     break
                 case 12:
-                    setNum = document.getElementById('td13')
-                    changeCss();
-                    resetCss();
+                    changeCss(td12);
                     break
                 case 13:
-                    setNum = document.getElementById('td14')
-                    changeCss();
-                    resetCss();
+                    changeCss(td13);
                     break
                 case 14:
-                    setNum = document.getElementById('td15')
-                    changeCss();
-                    resetCss();
+                    changeCss(td14);
                     break
                 case 15:
-                    setNum = document.getElementById('td16')
-                    changeCss();
-                    resetCss();
+                    changeCss(td15);
+                    break
+                case 16:
+                    changeCss(td16);
                     break
             }   
         };
+
+        //ストップボタンクリック
+        //スタートボタン処理をストップ
+        document.getElementById('stop').addEventListener('click', function(){
+            //スタートボタンの制御解除
+            //startBtn.disabled = false;
+            stopBtn.disabled = true;
+
+            //スタートボタンクリック時の処理をストップさせる
+            clearInterval(timerId);
+
+            if(list.length == 0 ){
+                startBtn.disabled = true;
+            }else{
+                startBtn.disabled = false;
+            };
+
+            //スタートボタンクリック時に取得した配列に紐づくIdの背景色を変更
+            setNum.classList.add('change');
+            //console.log(setNum);
+
+            //配列から
+            list.splice(i,1);
+            console.log(i);
+            //console.log(number);
+            console.log(list);
+            
+        });
 
         //スタートボタンクリック
         //n秒ごとにスタートボタン処理を実行する
@@ -210,44 +199,20 @@
         let startBtn = document.getElementById('start');
         startBtn.addEventListener('click', function(){
             timerId = setInterval(startevent, 1000);
-
             //スタートボタン制御
             startBtn.disabled = true;
 
         });
-
-        //ストップボタンクリック
-        //スタートボタン処理をストップ
-        document.getElementById('stop').addEventListener('click', function(){
-            clearInterval(timerId);
-            setNum.classList.add('change');
-
-            //スタートボタンの制御解除
-            startBtn.disabled = false;
-
-            //ストップボタンをダブルクリックしないとマスの背景の色付けが固定されない
-            //　→クリック時にマスの背景の色付けを固定したい
-            //ストップボタンクリック時に選択された値を保持→選択肢から除外したい
-            //　→splice
-    
-        });
-
         
         //リセットボタンクリック
         //スタートボタン処理をストップ
-        let array = [];
-        function resetEvent (){
-            for(let i = 0; i <16 ; i++){
-                array.push(document.getElementById('td'+i));
-            }
-            array.classList.add('resetAll');
-            //array.style.backgroundColor = 'black'
-            console.log(array);
-        }
         
         document.getElementById('reset').addEventListener('click', function(){
+            
             clearInterval(timerId);
-            resetEvent();
+            list = [];
+
+            //resetEvent();
 
             //let reset = document.getElementById('tb');
             //reset.classList.add('resetAll');
@@ -265,14 +230,10 @@
             
             //all.style.backgroundColor = 'black';
 
-           
-
             //ストップボタンクリックで選択された値を全て削除したい
             //全てのマスのbackgroundColorをリセットしたい
 
         });
-        
-    })
        
     </script>
 </body>
