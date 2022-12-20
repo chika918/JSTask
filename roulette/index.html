@@ -7,234 +7,162 @@
     <title>Document</title>
     <style>
         table{
-            border: 3px solid black;
+            border: 3px solid grey;
             border-collapse: collapse;
         }
-        #td1,#td2,#td3,#td4,#td5,#td6,#td7,#td8,#td9,#td10,#td11,#td12,#td13,#td14,#td15,#td16{
+        td{
             width: 90px;
             height: 90px;
             font-size: 45px;
-            border: 1px solid black;
+            border: 1px solid gray;
             text-align: center;
-        }
-        .change {
-            background-color: rgb(157, 102, 211);
-        }
-        .resetAll {
-            background-color: transparent ;
         }
         div {
             display: flex;
             justify-content: space-between;
-            width: 300px;
+            width: 375px;
             margin-top: 30px;
         }
         button{
+            width: 100px;
+            height: 45px;
+            border-radius: 30px;
             font-size: 20px;
+            background-color: #a260bf;
+            border: whitesmoke;
+            color: whitesmoke;
         }
-       .wearing {
-            background-color: black;
+        button:disabled {
+            background-color: #cccccc;
         }
     </style>
 </head>
+
 <body>
-    <table id="tb">
-        <tr id="trr">
-            <td class="tdNum" id="td1">1</td>
-            <td class="tdNum" id="td2">2</td>
-            <td class="tdNum" id="td3">3</td>
-            <td class="tdNum" id="td4">4</td>
+    <table>
+        <tr>
+            <td id="td1">1</td>
+            <td id="td2">2</td>
+            <td id="td3">3</td>
+            <td id="td4">4</td>
         </tr>
         <tr>
-            <td class="tdNum" id="td5">5</td>
-            <td class="tdNum" id="td6">6</td>
-            <td class="tdNum" id="td7">7</td>
-            <td class="tdNum" id="td8">8</td>
+            <td id="td5">5</td>
+            <td id="td6">6</td>
+            <td id="td7">7</td>
+            <td id="td8">8</td>
         </tr>
         <tr>
-            <td class="tdNum" id="td9">9</td>
-            <td class="tdNum" id="td10">10</td>
-            <td class="tdNum" id="td11">11</td>
-            <td class="tdNum" id="td12">12</td>
+            <td id="td9">9</td>
+            <td id="td10">10</td>
+            <td id="td11">11</td>
+            <td id="td12">12</td>
         </tr>
         <tr>
-            <td class="tdNum" id="td13">13</td>
-            <td class="tdNum" id="td14">14</td>
-            <td class="tdNum" id="td15">15</td>
-            <td class="tdNum" id="td16">16</td>
+            <td id="td13">13</td>
+            <td id="td14">14</td>
+            <td id="td15">15</td>
+            <td id="td16">16</td>
         </tr>
     </table>
+
     <div>
         <button id="start">スタート</button>
-        <button id="stop">ストップ</button>
+        <button disabled id="stop">ストップ</button>
         <button id="reset">リセット</button>
     </div>
     
     <script>
-        //document.addEventListener('DOMContentLoaded',function(){ 
-        //画面遷移時にストップボタン、リセットボタンを非活性
+        let startBtn = document.getElementById('start');
         let stopBtn = document.getElementById('stop');
         let resetBtn = document.getElementById('reset');
-        stopBtn.disabled = true;
-        resetBtn.disabled = true;
-        //})
 
-        //1~16の配列を定義
-        let list = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16];
+        let array = [td1,td2,td3,td4,td5,td6,td7,td8,td9,td10,td11,td12,td13,td14,td15,td16];
+        let randomIndex;
+        let getNum;
         
-        //マスの背景色変更処理
-        let setNum;
-        function changeCss(tdId){
-            //取得された配列に紐づくIdをsetNumに入れておく
-            setNum = tdId;
+        //スタートボタンクリック時の処理
+        function startEvent(){
+
+            //ランダムな値をシャッフルし並べ替え
+            array = shuffle(array);
+            function shuffle(arrays){
+                array = arrays.slice();
+                for (let i = array.length -1; i >= 0; i--){
+                    randomIndex = Math.floor(Math.random()*(i + 1));
+                    [array[i], array[randomIndex]] = [array[randomIndex], array[i]];
+                }
+                return array;  
+            }
 
             //背景色の変更⇆削除の繰り返し
-            tdId.classList.add('change');
-            setTimeout(() => {
-                tdId.classList.remove('change');
-            },500
-            );
+            array[0].style.backgroundColor = '#c394d5';
+            if(array.length > 1){
+                setTimeout(() => {
+                array[0].style.backgroundColor = '';
+                },50);                
+            } 
         }
-    
-        //スタートボタン処理
-        let i;
-        let number
-        function startevent (){
-            //ストップボタン、リセットボタンを活性
-            stopBtn.disabled = false;
-            resetBtn.disabled = false;
-            //0~15のランダムな値を取得
-            i = Math.floor(Math.random() * list.length);
-            number = i + 1;
-            //↓挙動確認用↓
-            //console.log(i);
-            //console.log(number);
-
-
-            //ランダムに取得した値0~15の条件分岐
-            switch (number){ 
-                case 1:
-                    //マスの背景色変更処理を実行
-                    changeCss(td1);
-                    break;
-                case 2:
-                    changeCss(td2);
-                    break
-                case 3:
-                    changeCss(td3);
-                    break
-                case 4:
-                    changeCss(td4);
-                    break
-                case 5:
-                    changeCss(td5);
-                    break
-                case 6:
-                    changeCss(td6);
-                    break
-                case 7:
-                    changeCss(td7);
-                    break
-                case 8:
-                    changeCss(td8);
-                    break
-                case 9:
-                    changeCss(td9);
-                    break
-                case 10:
-                    changeCss(td10);
-                    break
-                case 11:
-                    changeCss(td11);
-                    break
-                case 12:
-                    changeCss(td12);
-                    break
-                case 13:
-                    changeCss(td13);
-                    break
-                case 14:
-                    changeCss(td14);
-                    break
-                case 15:
-                    changeCss(td15);
-                    break
-                case 16:
-                    changeCss(td16);
-                    break
-            }   
-        };
-
-        //ストップボタンクリック
-        //スタートボタン処理をストップ
-        document.getElementById('stop').addEventListener('click', function(){
-            //スタートボタンの制御解除
-            //startBtn.disabled = false;
-            stopBtn.disabled = true;
-
-            //スタートボタンクリック時の処理をストップさせる
-            clearInterval(timerId);
-
-            if(list.length == 0 ){
-                startBtn.disabled = true;
-            }else{
-                startBtn.disabled = false;
-            };
-
-            //スタートボタンクリック時に取得した配列に紐づくIdの背景色を変更
-            setNum.classList.add('change');
-            //console.log(setNum);
-
-            //配列から
-            list.splice(i,1);
-            console.log(i);
-            //console.log(number);
-            console.log(list);
-            
-        });
 
         //スタートボタンクリック
         //n秒ごとにスタートボタン処理を実行する
         let timerId;
-        let startBtn = document.getElementById('start');
         startBtn.addEventListener('click', function(){
-            timerId = setInterval(startevent, 1000);
-            //スタートボタン制御
+            //ストップボタン、リセットボタン制御解除、スタートボタン制御
+            stopBtn.disabled = false;
+            resetBtn.disabled = false;
             startBtn.disabled = true;
 
+            //背景色の変更⇆削除の繰り返しをn秒ごとに実行（「スタートボタンクリック時の処理」を実行する）
+            timerId = setInterval(startEvent, 100);
         });
-        
-        //リセットボタンクリック
-        //スタートボタン処理をストップ
-        
-        document.getElementById('reset').addEventListener('click', function(){
-            
+
+        //ストップボタンクリック時の処理
+        document.getElementById('stop').addEventListener('click', function(){
+
+            //スタートボタン制御解除、ストップボタン制御
+            startBtn.disabled = false;
+            stopBtn.disabled = true;
+
+            //スタートボタンクリック時に取得した配列に紐づくセルの背景色を変更
+            array[0].style.backgroundColor = '#a260bf';
+            array[0].style.color = '#696969';
+
+            //スタートボタンクリック時の処理をストップ
             clearInterval(timerId);
-            list = [];
 
-            //resetEvent();
+            //配列の先頭要素を削除
+            array.shift();
 
-            //let reset = document.getElementById('tb');
-            //reset.classList.add('resetAll');
-
-            //let id = document.getElementById('td1');
-            //console.log(id);
-            //let classN = document.getElementsByClassName('tdNum');
-            //console.log(classN);
-
-            //aiu();
-            //let obj = document.querySelectorAll('td');
-            //console.log(obj);
-            //obj.style.backgroundColor = "white";
-            
-            
-            //all.style.backgroundColor = 'black';
-
-            //ストップボタンクリックで選択された値を全て削除したい
-            //全てのマスのbackgroundColorをリセットしたい
-
+            //配列が0になったらスタートボタンを非活性
+            if(array.length == 0){
+                startBtn.disabled = true;
+            } else {
+                startBtn.disabled = false;
+            }
         });
-       
+
+        //リセットボタンクリック
+        document.getElementById('reset').addEventListener('click', function(){
+            //スタートボタン制御解除
+            stopBtn.disabled = true;
+            if(startBtn.disabled = true){
+                startBtn.disabled = false;
+            }
+            
+            //スタートボタンクリック時の処理をストップ
+            clearInterval(timerId);
+            
+            //配列を初期値に戻す
+            array = [td1,td2,td3,td4,td5,td6,td7,td8,td9,td10,td11,td12,td13,td14,td15,td16];
+            
+            //全マスの背景色を削除
+            for (let i = 0; i <= 15; i++){
+                array[i].style.backgroundColor = '';
+                array[i].style.color = '';
+            }
+        })
+
     </script>
 </body>
 </html>
