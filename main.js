@@ -36,3 +36,34 @@ try{
 }
 
 
+//問3
+//変数、関数が存在しない
+try {
+    throw new ReferenceError("指定した変数・関数は存在しません。");
+    console.log(array2(実行れされない));
+} catch (e) {
+    console.log(e.message);
+    
+} finally {
+    console.log("エラーで表示されませんでした(問3-1)")
+}
+
+//文法エラー
+try {
+    throw new SyntaxError("構文間違いです")
+    console.lo('実行されない');
+} catch (e) {
+    console.log(e.message);
+} finally {
+    console.log("エラーで表示されませんでした(問3-2)")
+}
+
+//タイプエラー
+try {
+    throw new TypeError("タイプエラーです")
+    console.log('実行されない');
+} catch (e) {
+    console.log(e.message);
+} finally {
+    console.log("エラーで表示されませんでした(問3-3)")
+}
