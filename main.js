@@ -35,35 +35,50 @@ try{
     console.log("必ず実行（問2）");
 }
 
-
-//問3
-//変数、関数が存在しない
+//問3　例外処理
 try {
     throw new ReferenceError("指定した変数・関数は存在しません。");
     console.log(array2(実行れされない));
 } catch (e) {
-    console.log(e.message);
-    
+
+    if (e instanceof ReferenceError){
+        console.log(e.message);
+        e = new SyntaxError("構文間違いです。");
+    }
+
+    if (e instanceof SyntaxError){
+        console.log(e.message);
+        e = new TypeError("タイプエラーです。");
+    };
+
+    if (e instanceof TypeError){
+        console.log(e.message);
+    }
+
 } finally {
-    console.log("エラーで表示されませんでした(問3-1)")
+    console.log("エラーで表示されませんでした(問3)")
 }
 
-//文法エラー
-try {
-    throw new SyntaxError("構文間違いです")
-    console.lo('実行されない');
-} catch (e) {
-    console.log(e.message);
-} finally {
-    console.log("エラーで表示されませんでした(問3-2)")
+//問4
+/* 
+console.log("A");
+setTimeout(function(){
+    console.log("B");
+  }, 3000);
+console.log("C");
+*/
+
+//下記に修正
+//setTimeoutはawaitできない →　promiseでラップ
+function callB() {
+    return new Promise(function(resolve){
+      setTimeout(function(){resolve("B")}, 3000)
+    })
 }
 
-//タイプエラー
-try {
-    throw new TypeError("タイプエラーです")
-    console.log('実行されない');
-} catch (e) {
-    console.log(e.message);
-} finally {
-    console.log("エラーで表示されませんでした(問3-3)")
+async function myAsync() {
+    console.log("A");
+    console.log(await callB());
+    console.log("C");
 }
+myAsync();
