@@ -3,11 +3,11 @@
 try{
     let array = [0,1,2,3,4];
     for(let i = 0; i <= 5; i++){
-        console.lg(array2[i]);
+        console.log(array2[i]);
     }
 } catch(e){
     //エラーが発生したら実行される
-    console.log(e);
+    console.log(e.message);
 } finally{
     //エラーに関係なく必ず実行
     console.log("必ず実行（問1）");
